@@ -18,7 +18,8 @@ class User < ApplicationRecord
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
-  before_create :validate_username
+  before_validation :validate_username
+
   before_save :encrypt_password
 
   def encrypt_password
@@ -33,8 +34,7 @@ class User < ApplicationRecord
 
   def validate_username
     username = self.username.downcase
-    self.username = nil
-    self.username = username unless User.all.map(&:username).include? username
+    self.username = username unless self.username.present?
   end
 
   def self.hash_to_string(password_hash)
