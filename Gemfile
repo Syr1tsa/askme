@@ -8,6 +8,9 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
 gem 'bootsnap', '>= 1.4.2', require: false
+
+gem 'webpacker', '~> 4.x'
+
 gem 'email_validator'  
 
 group :development, :test do
