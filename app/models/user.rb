@@ -1,18 +1,17 @@
 require 'openssl'
 
 class User < ApplicationRecord
-
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
   has_many :questions
 
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
   validates :email, email: true
-  validates :username, format: { with: /\A[a-zA-Z&_]+\z/,
+  validates :username, format: { with: /\A[a-zA-Z_\d]+\z/,
                                  length: { maximum: 40 },
                                  message: "only allows letters" }
+  validates :email, :username, presence: true
+  validates :email, :username, uniqueness: true
 
   attr_accessor :password
   validates_presence_of :password, on: :create
