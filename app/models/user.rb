@@ -4,21 +4,19 @@ class User < ApplicationRecord
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  has_many :questions
-
-  validates :email, email: true
-  validates :username, format: { with: /\A[a-zA-Z_\d]+\z/,
-                                 length: { maximum: 40 },
-                                 message: "only allows letters" }
-  validates :email, :username, presence: true
-  validates :email, :username, uniqueness: true
+  REGULAR_FOR_USERNAME = /\A[a-zA-Z_\d]+\z/
 
   attr_accessor :password
+
+  has_many :questions
+
+  validates :email, email: true, presence: true, uniqueness: true
+  validates :username, format: { with: REGULAR_FOR_USERNAME, length: { maximum: 40 } }, presence: true, uniqueness: true
+
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
 
-  before_validation :validate_username
-
+  before_validation :username_to_lower_case
   before_save :encrypt_password
 
   def encrypt_password
@@ -31,10 +29,11 @@ class User < ApplicationRecord
     end
   end
 
-  def validate_username
-    username = self.username.downcase
-    self.username = username unless self.username.present?
+  def username_to_lower_case
+    self.username = self.username.downcase
   end
+
+  private
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
