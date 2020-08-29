@@ -11,7 +11,8 @@ class User < ApplicationRecord
   has_many :questions
 
   validates :email, email: true, presence: true, uniqueness: true
-  validates :username, format: { with: REGULAR_FOR_USERNAME, length: { maximum: 40 } }, presence: true, uniqueness: true
+  validates :username, format: { with: REGULAR_FOR_USERNAME }, presence: true, uniqueness: true
+  validates_length_of :username, maximum: 40
 
   validates_presence_of :password, on: :create
   validates_confirmation_of :password
