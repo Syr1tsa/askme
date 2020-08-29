@@ -12,10 +12,11 @@ module ApplicationHelper
     remainder = number % 10
     last_num_in_number = number % 100
 
-    puts remainder.to_s
+    number = number.to_s + " "
 
-    return form_1 if remainder == 1 && !(last_num_in_number.between?(11,14))
-    return form_2 if (2..4).include?remainder && !(last_num_in_number.between?(11,14))
-    return form_3 if remainder.between?(5,14) || last_num_in_number.between?(11,14) || remainder == 0
+    return number + form_3 if last_num_in_number.between?(11,14)
+    return number + form_1 if remainder == 1
+    return number + form_2 if remainder.between?(2,4)
+    number + form_3
   end
 end

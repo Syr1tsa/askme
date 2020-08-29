@@ -38,7 +38,7 @@
 <div class="column-3-4">
   <div class="user-questions buffer-both">
     <h3 class="user-questions-lenght">
-      Вопросов: <%= @questions.length %>
+      <%= get_word_form(@questions.length, 'Вопрос', 'Вопроса', 'Вопросов') %>
     </h3>
     <div class="questions-list">
       <% @questions.each do |question| %>
