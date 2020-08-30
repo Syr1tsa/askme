@@ -10,8 +10,7 @@ class User < ApplicationRecord
 
   has_many :questions
 
-  validates :username, format: { with: REGULAR_FOR_USERNAME }, presence: true, uniqueness: true
-  validates_length_of :username, maximum: 40
+  validates :username, format: { with: REGULAR_FOR_USERNAME }, length: { maximum: 40 }, presence: true, uniqueness: true
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
 
@@ -51,10 +50,7 @@ class User < ApplicationRecord
   end
 
   def to_lower_case
-    unless self.username.nil? & self.email.nil?
-      self.username = self.username.downcase
-      self.email = self.email.downcase
-    end
+    self.username = username.downcase unless username.nil?
+    self.email = email.downcase unless email.nil?
   end
-
 end
