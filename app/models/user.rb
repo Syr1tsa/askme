@@ -5,11 +5,13 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
 
   REGULAR_FOR_USERNAME = /\A[a-zA-Z_\d]+\z/
+  REGULAR_FOR_NAME = /\A[a-zA-Z]+\z/
 
   attr_accessor :password
 
   has_many :questions
 
+  validates :name, format: { with: REGULAR_FOR_NAME }, presence: true
   validates :username, format: { with: REGULAR_FOR_USERNAME }, length: { maximum: 40 }, presence: true, uniqueness: true
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
