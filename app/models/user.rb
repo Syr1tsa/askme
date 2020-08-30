@@ -33,7 +33,6 @@ class User < ApplicationRecord
     )
 
     return user if user.password_hash == hashed_password
-
     nil
   end
 
