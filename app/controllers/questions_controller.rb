@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :load_question, only: [:edit, :update, :destroy]
   before_action :authorize_user, except: [:create]
 
   # GET /questions/1/edit
@@ -46,6 +46,11 @@ class QuestionsController < ApplicationController
 
   # Only allow a trusted parameter "white list" through.
   def question_params
-    params.require(:question).permit(:user_id, :text, :answer)
+    if current_user.present? &&
+      params[:question][:user_id].to_i == current_user.id
+      params.require(:question).permit(:user_id, :text, :answer)
+    else
+      params.require(:question).permit(:user_id, :text)
+    end
   end
 end
