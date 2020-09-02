@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  REGULAR_FOR_USERNAME = /\A[a-zA-Z_\d]+\z/
+  REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
   REGULAR_FOR_NAME = /\A[a-zA-Z]+\z/
 
   attr_accessor :password

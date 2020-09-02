@@ -8,7 +8,7 @@ module ApplicationHelper
   end
 
   def fa_icon(icon_class)
-    content_tag 'span', '', class: "fa fa=#{icon_class}"
+    content_tag 'span', '', class: "fa fa-#{icon_class}"
   end
 
   def get_word_form(number, form1, form2, form3)
