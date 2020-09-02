@@ -4,7 +4,7 @@ class User < ApplicationRecord
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  REGULAR_FOR_USERNAME = /\A[a-zA-Z_\d]+\z/
+  REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
   REGULAR_FOR_NAME = /\A[a-zA-Z]+\z/
 
   attr_accessor :password
@@ -24,7 +24,7 @@ class User < ApplicationRecord
   end
 
   def self.authenticate(email, password)
-    user = find_by(email: email)
+    user = find_by(subject_area: area.downcase, email: email)
 
     return nil unless user.present?
 
@@ -51,7 +51,7 @@ class User < ApplicationRecord
   end
 
   def to_lower_case
-    self.username = username.downcase unless username.nil?
-    self.email = email.downcase unless email.nil?
+    username&.downcase!
+    email&.downcase!
   end
 end
