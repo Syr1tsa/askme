@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_08_21_203724) do
+ActiveRecord::Schema.define(version: 2020_09_02_221959) do
 
   create_table "questions", force: :cascade do |t|
     t.string "text"
@@ -30,6 +30,7 @@ ActiveRecord::Schema.define(version: 2020_08_21_203724) do
     t.string "password_hash"
     t.string "password_salt"
     t.string "avatar_url"
+    t.index ["email", "username"], name: "index_users_on_email_and_username", unique: true
   end
 
   add_foreign_key "questions", "users"
