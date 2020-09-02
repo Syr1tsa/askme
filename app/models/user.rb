@@ -24,11 +24,7 @@ class User < ApplicationRecord
   end
 
   def self.authenticate(email, password)
-<<<<<<< HEAD
     user = find_by(email: email.downcase)
-=======
-    user = find_by(subject_area: area.downcase, email: email)
->>>>>>> 1d06876a99d263e7bc8f230977936749d2332199
 
     return nil unless user.present?
 
