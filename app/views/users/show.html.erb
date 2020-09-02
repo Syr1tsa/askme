@@ -41,8 +41,14 @@
 
 <div class="column-3-4">
   <div class="user-questions buffer-both">
-    <h3 class="user-questions-lenght">
-      <%= get_word_form(@questions.length, 'Вопрос', 'Вопроса', 'Вопросов') %>
+    <h3 class="user-questions-length">
+      <%= @questions.length %> <%= get_word_form(@questions.length, 'вопрос', 'вопроса', 'вопросов') %>
+    </h3>
+    <h3 class="user-unanswered-questions"> 
+      <%= get_length_unanswered_questions(@questions)%> неотвеченных <%= get_word_form(get_length_unanswered_questions(@questions), 'вопрос', 'вопроса', 'вопросов') %> 
+    </h3>
+    <h3 class="user-answered-questions">
+      <%= get_length_answered_questions(@questions)%> отвеченных <%= get_word_form(get_length_answered_questions(@questions), 'вопрос', 'вопроса', 'вопросов') %>
     </h3>
     <div class="questions-list">
       <% @questions.each do |question| %>

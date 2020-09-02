@@ -26,6 +26,14 @@ module ApplicationHelper
       else
         form3
       end
-    "#{number} #{form}"
+  end
+
+  def get_length_unanswered_questions(questions)
+    unanswered_questions_length = 
+      @questions.select { |q| q.answer.nil? }.length
+  end
+
+  def get_length_answered_questions(questions)
+    @questions.length - get_length_unanswered_questions(questions)
   end
 end
