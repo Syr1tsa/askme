@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     redirect_to root_url, alert: "#{current_user.name}, вы уже залогинены!" if current_user.present?
     @user = User.new(user_params)
     if @user.save
+      session[:user_id] = @user.id
       redirect_to root_url, notice: "Пользователь #{@user.username} успешно создан!"
     else
       render 'new'
