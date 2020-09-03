@@ -1,6 +1,5 @@
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-
+require("@rails/ujs").start()
+require("@rails/activestorage").start()
 require("channels")
 require('jquery')
 //= require_tree .
