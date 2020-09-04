@@ -23,9 +23,11 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @colors = Color.all.map(&:name)
   end
 
   def update
+    @colors = Color.all.map(&:name)
     if @user.update(user_params)
       redirect_to user_path, notice: "#{@user.name}, ваши данные обновлены :)"
     else
@@ -34,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @colors = Color.all.map(&:name)
     @questions = @user.questions.order(created_at: :desc)
     @new_question = @user.questions.build
     @answers_count = @questions.where.not(answer: nil).count
@@ -52,6 +55,6 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :password_confirmation,
-                                 :name, :username, :avatar_url)
+                                 :name, :username, :avatar_url, :color_block)
   end
 end

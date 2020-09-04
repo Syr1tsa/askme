@@ -4,8 +4,23 @@
 
 .user-header {
   padding: 20px 0;
-  background: #005a55;
   color: white;
+}
+
+.green {
+    background: #669933;
+}
+
+.red {
+    background: #ff4040;
+}
+
+.amethyst {
+    background: #9966cc;
+}
+
+.black {
+    background: #1d1623;
 }
 
 .user-header a {
