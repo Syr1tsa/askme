@@ -27,12 +27,4 @@ module ApplicationHelper
         form3
       end
   end
-
-  def get_length_unanswered_questions(questions)
-    questions.select { |q| q.answer.nil? }.length
-  end
-
-  def get_length_answered_questions(questions)
-    questions.length - get_length_unanswered_questions(questions)
-  end
 end

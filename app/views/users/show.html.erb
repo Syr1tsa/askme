@@ -45,10 +45,10 @@
       <%= @questions.length %> <%= get_word_form(@questions.length, 'вопрос', 'вопроса', 'вопросов') %>
     </h3>
     <h3 class="user-unanswered-questions"> 
-      <%= get_length_unanswered_questions(@questions)%> <%= get_word_form(get_length_unanswered_questions(@questions), 'неотвеченный вопрос', 'неотвеченных вопроса', 'неотвеченных вопросов') %>
+      <%= @unanswered_count %> <%= get_word_form(@unanswered_count, 'неотвеченный вопрос', 'неотвеченных вопроса', 'неотвеченных вопросов') %>
     </h3>
     <h3 class="user-answered-questions">
-      <%= get_length_answered_questions(@questions)%> <%= get_word_form(get_length_answered_questions(@questions), 'отвеченный вопрос', 'отвеченных вопроса', 'отвеченных вопросов') %>
+      <%= @answers_count %> <%= get_word_form(@answers_count, 'отвеченный вопрос', 'отвеченных вопроса', 'отвеченных вопросов') %>
     </h3>
     <div class="questions-list">
       <% @questions.each do |question| %>
