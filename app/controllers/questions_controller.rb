@@ -48,9 +48,9 @@ class QuestionsController < ApplicationController
   def question_params
     if current_user.present? &&
       params[:question][:user_id].to_i == current_user.id
-      params.require(:question).permit(:user_id, :text, :answer)
+      params.require(:question).permit(:user_id, :author, :text, :answer)
     else
-      params.require(:question).permit(:user_id, :text)
+      params.require(:question).permit(:user_id, :author, :text)
     end
   end
 end

@@ -1,11 +1,21 @@
 <div class="question">
   <div class="question-content">
+    <% unless question.author.nil? %>
+      <h4>
+        Вопрос от пользователя <%= link_to "@" + question.author, user_path(User.find_by(username: question.author)) %>
+      </h4>
+    <% else %>
+      <h4>
+        Вопрос от анонимного пользователя
+      </h4>
+    <% end %>
     <div class="question-text text-lead">
       <%= question.text %>
     </div>
-
+`
     <% if question.answer.present? %>
       <div class="question-answer text-lead">
+
         <%= question.answer %>
       </div>
     <% end %>

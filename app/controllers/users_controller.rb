@@ -45,6 +45,7 @@ class UsersController < ApplicationController
 
   def destroy
     username = @user.username
+    @user.questions.destroy_all
     @user.destroy
     redirect_to root_path, notice: "Пользователь #{username} успешно удалён"
   end
