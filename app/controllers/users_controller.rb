@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
   def show
     @colors = Color.all.map(&:name)
+
     @questions = @user.questions.order(created_at: :desc)
     @new_question = @user.questions.build
     @answers_count = @questions.where.not(answer: nil).count
