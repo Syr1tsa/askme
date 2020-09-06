@@ -43,6 +43,12 @@ class UsersController < ApplicationController
     @unanswered_count = @questions.length - @answers_count
   end
 
+  def destroy
+    username = @user.username
+    @user.destroy
+    redirect_to root_path, notice: "Пользователь #{username} успешно удалён"
+  end
+
   private
 
   def authorize_user
