@@ -23,6 +23,12 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @colors = [
+      ["purple pain", "#8458B3"],
+      ["heavy purple", "#a28089"],
+      ["brutal blue", "#0049B7"],
+      ["redline", "#9e363a"]
+    ]
   end
 
   def update

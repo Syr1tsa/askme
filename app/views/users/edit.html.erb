@@ -30,7 +30,7 @@
 
     <div class="form-field">
       <%= f.label 'Цвет вашего блока профиля', class: 'form-label' %>
-      <%= f.select :color_block, Color.all.collect { |p| [ p.name, p.hex ] }, include_blank: true %>
+      <%= f.select :color_block, @colors, :selected => "#8458B3"%>
     </div>
 
     <div class="buffer-top-large buffer-bottom">

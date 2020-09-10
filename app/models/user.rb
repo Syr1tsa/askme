@@ -7,6 +7,7 @@ class User < ApplicationRecord
   REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
   REGULAR_FOR_NAME = /\A[a-zA-ZА-яа-я]+\z/
   REGULAR_FOR_AVATAR_URL = /\A((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|avatar.jpg\z/ix
+  REGULAR_FOR_COLOR
 
   attr_accessor :password
 
@@ -16,6 +17,7 @@ class User < ApplicationRecord
   validates :username, format: { with: REGULAR_FOR_USERNAME }, length: { maximum: 40 }, presence: true, uniqueness: true
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
+  validates_format_of :color_block
   validates_format_of :avatar_url, with: REGULAR_FOR_AVATAR_URL
 
   before_validation :to_lower_case, :default_image_url
@@ -52,8 +54,9 @@ class User < ApplicationRecord
     end
   end
 
-  def default_image_url
+  def default_values_for_avatar_and_colorblock
     self.avatar_url = 'avatar.jpg' if avatar_url.nil?
+    self.color_block = "#8458B3" if color_block.nil?
   end
 
   def to_lower_case
