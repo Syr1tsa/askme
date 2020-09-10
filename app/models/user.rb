@@ -7,7 +7,7 @@ class User < ApplicationRecord
   REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
   REGULAR_FOR_NAME = /\A[a-zA-ZА-яа-я]+\z/
   REGULAR_FOR_AVATAR_URL = /\A((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|avatar.jpg\z/ix
-  REGULAR_FOR_COLOR
+  REGULAR_FOR_COLOR = /\A#(?:[0-9a-fA-F]{3}){1,2}\z/
 
   attr_accessor :password
 
@@ -17,11 +17,20 @@ class User < ApplicationRecord
   validates :username, format: { with: REGULAR_FOR_USERNAME }, length: { maximum: 40 }, presence: true, uniqueness: true
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
-  validates_format_of :color_block
+  validates_format_of :color_block, with: REGULAR_FOR_COLOR
   validates_format_of :avatar_url, with: REGULAR_FOR_AVATAR_URL
 
-  before_validation :to_lower_case, :default_image_url
+  before_validation :to_lower_case, :default_values_for_avatar_and_colorblock
   before_save :encrypt_password
+
+  def colors
+    [
+      ["purple pain", "#8458B3"],
+      ["heavy purple", "#a28089"],
+      ["brutal blue", "#0049B7"],
+      ["redline", "#9e363a"]
+    ]
+  end
 
   def self.hash_to_string(password_hash)
     password_hash.unpack('H*')[0]
@@ -56,7 +65,7 @@ class User < ApplicationRecord
 
   def default_values_for_avatar_and_colorblock
     self.avatar_url = 'avatar.jpg' if avatar_url.nil?
-    self.color_block = "#8458B3" if color_block.nil?
+    self.color_block = '#8458B3' if color_block.nil? || !(colors.map {|name, hex| hex}.include? color_block)
   end
 
   def to_lower_case
