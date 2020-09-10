@@ -11,7 +11,7 @@ class User < ApplicationRecord
 
   attr_accessor :password
 
-  has_many :questions
+  has_many :questions, dependent: :destroy
 
   validates :name, format: { with: REGULAR_FOR_NAME }, presence: true
   validates :username, format: { with: REGULAR_FOR_USERNAME }, length: { maximum: 40 }, presence: true, uniqueness: true

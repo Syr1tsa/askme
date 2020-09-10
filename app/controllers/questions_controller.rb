@@ -35,7 +35,6 @@ class QuestionsController < ApplicationController
 
   private
 
-  # Use callbacks to share common setup or constraints between actions.
   def load_question
     @question = Question.find(params[:id])
   end
@@ -44,7 +43,6 @@ class QuestionsController < ApplicationController
     reject_user(@question.user) unless @question.user == current_user
   end
 
-  # Only allow a trusted parameter "white list" through.
   def question_params
     if current_user.present? &&
       params[:question][:user_id].to_i == current_user.id

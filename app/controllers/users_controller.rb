@@ -42,9 +42,6 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    username = @user.username
-    Question.all.where(author: username).each { |q| q.update(author: nil, author_link: nil) }
-    @user.questions.destroy_all
     @user.destroy
     redirect_to root_path, notice: "Пользователь #{username} успешно удалён"
   end
