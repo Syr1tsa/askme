@@ -5,7 +5,7 @@ class User < ApplicationRecord
   DIGEST = OpenSSL::Digest::SHA256.new
 
   REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
-  REGULAR_FOR_NAME = /\A[a-zA-Z]+\z/
+  REGULAR_FOR_NAME = /\A[a-zA-ZА-яа-я]+\z/
   REGULAR_FOR_AVATAR_URL = /\A((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|avatar.jpg\z/ix
 
   attr_accessor :password
