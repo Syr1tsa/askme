@@ -25,10 +25,6 @@
     <div class="form">
       <%= form_for @new_question do |f| %>
         <%= f.hidden_field :user_id %>
-        <% if current_user.present? %>
-          <%= f.hidden_field :author, :value => current_user.username %>
-          <%= f.hidden_field :author_link, :value => user_path(current_user) %>
-        <% end %>
         <div class="form-field">
           <%= f.label "Ваш вопрос для #{@user.username}", class: 'form-label' %>
           <%= f.text_area :text, class: 'form-textarea' %>
