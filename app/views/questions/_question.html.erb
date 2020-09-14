@@ -1,14 +1,5 @@
 <div class="question">
   <div class="question-content">
-    <% unless question.author.nil? %>
-      <h4 class="question-content-author">
-        Вопрос от пользователя <%= link_to "@" + question.author, question.author_link %>
-      </h4>
-    <% else %>
-      <h4 class="question-content-author">
-        Вопрос от анонимного пользователя
-      </h4>
-    <% end %>
     <div class="question-text text-lead">
       <%= question.text %>
     </div>
@@ -21,6 +12,7 @@
     <% end %>
 
     <div class="question-date">
+      <%= question_author(question) %>
       <%= l(question.created_at, format: :short) %>
     </div>
   </div>
