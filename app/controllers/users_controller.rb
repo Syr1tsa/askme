@@ -23,7 +23,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @colors = @user.colors
+    @colors = User.colors
   end
 
   def update
