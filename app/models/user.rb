@@ -4,8 +4,8 @@ class User < ApplicationRecord
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  REGULAR_FOR_USERNAME = /\A[a-z_\d]+\z/
-  REGULAR_FOR_NAME = /\A[a-zA-ZА-яа-я]+\z/
+  REGULAR_FOR_USERNAME = /\A[\w\d_]+\z/
+  REGULAR_FOR_NAME = /\A[\wА-я]+\z/
   REGULAR_FOR_AVATAR_URL = /\A((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|avatar.jpg\z/ix
   REGULAR_FOR_COLOR = /\A#(?:[0-9a-fA-F]{3}){1,2}\z/
 
