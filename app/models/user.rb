@@ -1,13 +1,12 @@
 require 'openssl'
+require 'uri'
 
 class User < ApplicationRecord
   ITERATIONS = 2000
   DIGEST = OpenSSL::Digest::SHA256.new
 
-  REGULAR_FOR_USERNAME = /\A[\w\d_]+\z/
-  REGULAR_FOR_NAME = /\A[\wА-я]+\z/
-  REGULAR_FOR_AVATAR_URL = /\A((http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?)|avatar.jpg\z/ix
-  REGULAR_FOR_COLOR = /\A#(?:[0-9a-fA-F]{3}){1,2}\z/
+  REGULAR_FOR_USERNAME = /\A[[:alnum:]_]+\z/
+  REGULAR_FOR_NAME = /\A[[:upper:]][[:lower:]]+\z/
 
   COLORS =
     [
@@ -26,7 +25,7 @@ class User < ApplicationRecord
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
   validates :color_block, inclusion: {in: COLORS.map{ |name, hex| hex }}
-  validates_format_of :avatar_url, with: REGULAR_FOR_AVATAR_URL
+  validates_format_of :avatar_url, with: URI.regexp
 
   before_validation :to_lower_case
   before_save :encrypt_password
