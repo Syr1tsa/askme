@@ -28,7 +28,7 @@ class User < ApplicationRecord
   validates :color_block, inclusion: {in: COLORS.map{ |name, hex| hex }}
   validates_format_of :avatar_url, with: REGULAR_FOR_AVATAR_URL
 
-  before_validation :to_lower_case, :default_values_for_avatar_and_colorblock
+  before_validation :to_lower_case
   before_save :encrypt_password
 
   def self.colors
@@ -64,11 +64,6 @@ class User < ApplicationRecord
         OpenSSL::PKCS5.pbkdf2_hmac(self.password, self.password_salt, ITERATIONS, DIGEST.length, DIGEST)
       )
     end
-  end
-
-  def default_values_for_avatar_and_colorblock
-    self.avatar_url = 'avatar.jpg' if avatar_url.nil?
-    self.color_block = '#8458B3' if color_block.nil?
   end
 
   def to_lower_case
