@@ -15,6 +15,10 @@
       <%= question_author(question) %>
       <%= l(question.created_at, format: :short) %>
     </div>
+
+    <div class="question-tags">
+      <%= question.tags.map { |t| link_to t.name, tag_path(t) }.join(', ').html_safe %>
+    </div>
   </div>
 
   <% if question.user == current_user %>

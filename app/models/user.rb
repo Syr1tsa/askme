@@ -1,5 +1,4 @@
 require 'openssl'
-require 'uri'
 
 class User < ApplicationRecord
   ITERATIONS = 2000
@@ -25,7 +24,6 @@ class User < ApplicationRecord
   validates :email, email: true, presence: true, uniqueness: true
   validates :password, on: :create, presence: true, confirmation: true
   validates :color_block, inclusion: {in: COLORS.map{ |name, hex| hex }}
-  validates_format_of :avatar_url, with: URI.regexp
 
   before_validation :to_lower_case
   before_save :encrypt_password
@@ -70,3 +68,4 @@ class User < ApplicationRecord
     email&.downcase!
   end
 end
+
