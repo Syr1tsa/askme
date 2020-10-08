@@ -17,7 +17,7 @@
     </div>
 
     <div class="question-tags">
-      <%= question.tags.map { |t| link_to t.name, tag_path(t) }.join(', ').html_safe %>
+      <%= question.tags.map { |t| link_to "##{t.name}", tag_path(t.name) }.join(', ').html_safe %>
     </div>
   </div>
 

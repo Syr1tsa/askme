@@ -17,7 +17,7 @@
   <div class="tag-block">
     <h2>Теги:</h2>
     <% @tags.each do |tag| %>
-      <%= link_to tag.name, tag_path(tag) %>
+      <%= link_to "##{t.name}", tag_path(tag.name) %>
     <% end %>
   </div>
 </div>

@@ -8,4 +8,12 @@ class Tag < ApplicationRecord
 
   before_validation { name&.downcase! }
   validates :name, presence: true
+
+  before_save :delete_hashtag
+
+  private
+
+  def delete_hashtag
+    self.name.delete!("#")
+  end
 end
